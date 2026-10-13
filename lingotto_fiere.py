@@ -1,14 +1,31 @@
+from stand import Stand
+from espositore import Espositore
+
+
 class LingottoFiere:
     def __init__(self, nome):
         """Inizializza gli attributi e le strutture dati"""
-        # TODO
+        self.__nome = nome
 
     """Aggiungere setter e getter se necessari"""
-    # TODO
+    @property
+    def nome(self):
+        return self.__nome
+
+    @nome.setter
+    def nome(self, nome):
+        self.__nome = nome
+
+    def __str__(self):
+        return f"{self.__nome}"
 
     def carica_file_dati(self, file_path):
         """Carica i dati (stand ed espositori) dal file"""
-        # TODO
+        file = open(file_path, "r", encoding=utf-8)
+        for riga in file:
+            dati = riga.strip().split(",")
+            if len(dati) == 3:
+
 
     def assegna_stand_a_espositore(self, codice_stand, codice_espositore):
         """Associa uno stand a un espositore"""
