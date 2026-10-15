@@ -30,4 +30,9 @@ class StandConPreseAggiuntive(Stand):
 class StandPremium(Stand):
     def __init__(self, codice_stand, superficie, padiglione, prezzo):
         super().__init__(codice_stand, superficie, padiglione, prezzo)
-        # CONTINUA
+
+    def calcola_prezzo_finale(self):
+        return self.prezzo * 1.30
+
+    def __str__(self):
+        return f"{super().__str__()}, Prezzo finale: {float(self.calcola_prezzo_finale()):.2f}"
