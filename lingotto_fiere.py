@@ -50,7 +50,7 @@ class LingottoFiere:
                             stand_base = Stand(codice_stand, superficie, padiglione, prezzo)
                             self.stand_base[codice_stand] = stand_base
                     elif len(dati) == 5 and dati[4].isalnum():
-                        nume_prese = int(dati[4])
+                        nume_prese = dati[4]
                         if codice_stand not in self.stand_con_prese:
                             stand_con_prese = StandConPreseAggiuntive(codice_stand, superficie, padiglione, prezzo, nume_prese)
                             self.stand_con_prese[codice_stand] = stand_con_prese
@@ -68,14 +68,14 @@ class LingottoFiere:
         """Associa uno stand a un espositore"""
         if codice_stand in self.stand_base or codice_stand in self.stand_con_prese or codice_stand in self.stand_premium:
             if codice_espositore in self.espositori:
-                if codice_stand in self.stand_assegnato_a_espositore:
+                if codice_stand in self.stand_assegnato_a_espositore.keys():
                     raise Exception(f"Lo stand {codice_stand} non è disponibile.")
-                if codice_espositore in self.stand_assegnato_a_espositore:
+                if codice_espositore in self.stand_assegnato_a_espositore.values():
                     raise Exception(f"L'espositore {codice_espositore} è già associato ad un altro stand.")
                 if codice_stand not in self.stand_assegnato_a_espositore and codice_espositore not in self.stand_assegnato_a_espositore:
                     self.stand_assegnato_a_espositore[codice_stand] = codice_espositore
                     return self.stand_assegnato_a_espositore[codice_stand]
-                    # DA SISTEMARE!
+                    # CONTINUA!
 
 
     def elenca_espositori(self):
