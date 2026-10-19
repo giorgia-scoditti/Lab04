@@ -28,11 +28,11 @@ class StandConPreseAggiuntive(Stand):
         return f"{super().__str__()}, Prese aggiuntive: {self.__num_prese}, Prezzo finale: {float(self.calcola_prezzo()):.2f}"
 
 class StandPremium(Stand):
-    def __init__(self, codice_stand, superficie, padiglione, prezzo):
+    def __init__(self, codice_stand, superficie, padiglione, prezzo, posizione):
         super().__init__(codice_stand, superficie, padiglione, prezzo)
-
+        self.__posizione = posizione
     def calcola_prezzo_finale(self):
         return self.prezzo * 1.30
 
     def __str__(self):
-        return f"{super().__str__()}, Prezzo finale: {float(self.calcola_prezzo_finale()):.2f}"
+        return f"{super().__str__()}, Posizione: {self.__posizione}, Prezzo finale: {float(self.calcola_prezzo_finale()):.2f}"
