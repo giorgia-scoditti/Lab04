@@ -13,6 +13,7 @@ class LingottoFiere:
         self.stand_premium = {}
         self.espositori = {}
         self.stand_assegnato_a_espositore = {}
+        self.tutti_gli_stand = []
 
     """Aggiungere setter e getter se necessari"""
     @property
@@ -49,10 +50,10 @@ class LingottoFiere:
                         if codice_stand not in self.stand_base:
                             stand_base = Stand(codice_stand, superficie, padiglione, prezzo)
                             self.stand_base[codice_stand] = stand_base
-                    elif len(dati) == 5 and dati[4].isalnum():
-                        nume_prese = dati[4]
+                    elif len(dati) == 5 and dati[4].isdecimal():
+                        num_prese = dati[4]
                         if codice_stand not in self.stand_con_prese:
-                            stand_con_prese = StandConPreseAggiuntive(codice_stand, superficie, padiglione, prezzo, nume_prese)
+                            stand_con_prese = StandConPreseAggiuntive(codice_stand, superficie, padiglione, prezzo, num_prese)
                             self.stand_con_prese[codice_stand] = stand_con_prese
                     elif len(dati) == 5 and dati[4].isalpha():
                         posizione = dati[4]
@@ -75,14 +76,29 @@ class LingottoFiere:
                 if codice_stand not in self.stand_assegnato_a_espositore and codice_espositore not in self.stand_assegnato_a_espositore:
                     self.stand_assegnato_a_espositore[codice_stand] = codice_espositore
                     return self.stand_assegnato_a_espositore[codice_stand]
-                    # CONTINUA!
 
 
     def elenca_espositori(self):
         """Stampa l'elenco degli espositori mostrando, per ognuno, lo stand a cui è associato, quando applicabile """
-        # TODO
+        for espositore in self.espositori:
+            if espositore in self.stand_assegnato_a_espositore.values():
+                for stand in self.stand_assegnato_a_espositore.keys():
+                    if self.stand_assegnato_a_espositore[stand] == espositore:
+                        print(f"{espositore}, {stand}")
+            else:
+                print(espositore)
 
 
     def stand_ordinati_per_prezzo(self):
         """Restituisce la lista ordinata degli stand in base al prezzo"""
-        # TODO
+        for stand in self.stand_base.values():
+            if stand not in self.tutti_gli_stand:
+                self.tutti_gli_stand.append(stand)
+        for stand in self.stand_con_prese.values():
+            if stand not in self.tutti_gli_stand:
+                self.tutti_gli_stand.append(stand)
+        for stand in self.stand_premium.values():
+            if stand not in self.tutti_gli_stand:
+                self.tutti_gli_stand.append(stand)
+        lista_ordinata = sorted(self.tutti_gli_stand, key=lambda stand : stand.calcola_prezzo())
+        return lista_ordinata

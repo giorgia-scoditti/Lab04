@@ -1,5 +1,6 @@
 from lingotto_fiere import LingottoFiere
 
+
 def menu():
     print(f'\n--- MENU LINGOTTO FIERE ---')
     print("1. Modifica nome del centro fieristico")
@@ -10,6 +11,7 @@ def menu():
     print("6. Esci")
 
     return input("Scegli un'opzione >> ")
+
 
 def main():
     lingotto = LingottoFiere("Lingotto Fiere")
